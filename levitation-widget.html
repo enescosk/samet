@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnetic Levitation Stand – 3D Component</title>
+
+  <!--
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  INTEGRATION GUIDE                                              │
+  │                                                                 │
+  │  Vanilla HTML / static site (no bundler):                       │
+  │    1. Copy the <div id="lev-container"> wherever you need it.  │
+  │    2. Copy the <style> block into your stylesheet.              │
+  │    3. Copy the <script type="module"> block before </body>.     │
+  │       The CDN URLs are embedded directly – no npm needed.       │
+  │                                                                 │
+  │  Vite / webpack / any bundler:                                  │
+  │    npm install three                                            │
+  │    Replace the dynamic CDN imports at the top of the script     │
+  │    with standard static imports:                                │
+  │      import * as THREE from 'three';                            │
+  │      import { OrbitControls } from                              │
+  │        'three/examples/jsm/controls/OrbitControls.js';         │
+  │    (and so on for the other addons)                             │
+  └─────────────────────────────────────────────────────────────────┘
+  -->
+
+  <style>
+    /* ── Page reset (remove if already in your stylesheet) ─────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0f14; }   /* demo background – delete for production */
+
+    /* ── 3D Widget Container ──────────────────────────────────────
+       Set the height to whatever fits your layout.
+       The canvas background is transparent so your page colour
+       or any gradient behind this element will show through.
+    ─────────────────────────────────────────────────────────────── */
+    #lev-container {
+      position: relative;
+      width: 100%;
+      height: 520px;          /* ← change to suit your design */
+      overflow: hidden;
+    }
+
+    /* Canvas fills the container exactly */
+    #lev-container canvas {
+      display: block;
+      width:  100% !important;
+      height: 100% !important;
+    }
+
+    /* Hint label shown while JS modules download from CDN */
+    #lev-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font: 0.85rem/1 system-ui, sans-serif;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       STEP 1 — Place this div wherever the widget should appear.
+  ═══════════════════════════════════════════════════════════════════ -->
+  <div id="lev-container">
+    <div id="lev-loading">LOADING 3D SCENE…</div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       STEP 2 — Main 3D scene script.
+       CDN imports use esm.sh which serves pre-bundled ES modules
+       with correct CORS headers — no build tool required.
+  ═══════════════════════════════════════════════════════════════════ -->
+  <script type="module">
+
+  /* ================================================================
+     MAGNETIC LEVITATION STAND  ·  Three.js r167
+     ================================================================
+     Contents
+       §1  Imports
+       §2  Renderer + Scene + Camera
+       §3  Lighting
+       §4  Texture factory  (canvas-generated brushed metal)
+       §5  Base assembly
+       §6  Floating platform
+       §7  Magnetic atmosphere  (halo, beam, particles)
+       §8  Post-processing  (bloom)
+       §9  OrbitControls
+       §10 Resize handling
+       §11 Animation loop
+     ================================================================ */
+
+
+  // ─────────────────────────────────────────────────────────────── §1
+  // Imports — loaded from esm.sh CDN at runtime.
+  // The @vite-ignore hint inside each import() call tells Vite's
+  // analyser to leave the CDN URL alone, so this file works both as
+  // plain HTML and inside a Vite project without any config changes.
+  // Bundler users: replace the five lines below with npm imports.
+  // ────────────────────────────────────────────────────────────────
+  const CDN = 'https://esm.sh/three@0.167.0';
+  const THREE            = await import(/* @vite-ignore */ CDN);
+  const { OrbitControls }   = await import(/* @vite-ignore */ `${CDN}/examples/jsm/controls/OrbitControls.js`);
+  const { EffectComposer }  = await import(/* @vite-ignore */ `${CDN}/examples/jsm/postprocessing/EffectComposer.js`);
+  const { RenderPass }      = await import(/* @vite-ignore */ `${CDN}/examples/jsm/postprocessing/RenderPass.js`);
+  const { UnrealBloomPass } = await import(/* @vite-ignore */ `${CDN}/examples/jsm/postprocessing/UnrealBloomPass.js`);
+
+
+  /* ──────────────────────────────────────────────────────────────── §2
+     Renderer · Scene · Camera
+     ─────────────────────────────────────────────────────────────── */
+  const container = document.getElementById('lev-container');
+
+  // Scene – no background colour so the renderer stays transparent
+  const scene = new THREE.Scene();
+
+  // Perspective camera – 42° FOV gives a natural product-photo look
+  const camera = new THREE.PerspectiveCamera(
+    42,
+    container.clientWidth / container.clientHeight,
+    0.05,
+    60
+  );
+  camera.position.set(0, 3.2, 6.5);
+  camera.lookAt(0, 0.85, 0);
+
+  // WebGLRenderer with alpha:true → transparent canvas background
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setClearColor(0x000000, 0);           // fully transparent clear
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+  renderer.toneMapping       = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.25;
+  renderer.outputColorSpace  = THREE.SRGBColorSpace;
+  container.appendChild(renderer.domElement);
+
+  // Hide the loading label once the canvas is mounted
+  const loadingEl = document.getElementById('lev-loading');
+  if (loadingEl) loadingEl.style.opacity = '0';
+
+
+  /* ──────────────────────────────────────────────────────────────── §3
+     Lighting
+     ─────────────────────────────────────────────────────────────── */
+
+  // Soft ambient fill — prevents fully black shadows and reads as premium
+  const ambientLight = new THREE.AmbientLight(0xa0b4cc, 0.55);
+  scene.add(ambientLight);
+
+  // Key directional light — warm white from upper-right, casts shadows
+  const keyLight = new THREE.DirectionalLight(0xfff6e8, 3.0);
+  keyLight.position.set(5, 9, 5);
+  keyLight.castShadow = true;
+  Object.assign(keyLight.shadow.mapSize, { width: 1024, height: 1024 });
+  keyLight.shadow.camera.near   = 1;
+  keyLight.shadow.camera.far    = 24;
+  keyLight.shadow.camera.left   = keyLight.shadow.camera.bottom = -3;
+  keyLight.shadow.camera.right  = keyLight.shadow.camera.top   =  3;
+  keyLight.shadow.bias = -0.0003;
+  scene.add(keyLight);
+
+  // Cool rim light — hits metallic edges from the back-left for depth
+  const rimLight = new THREE.DirectionalLight(0x6699ee, 0.85);
+  rimLight.position.set(-5, 4, -5);
+  scene.add(rimLight);
+
+  // Magnetic glow point light — golden, sits between base and platform.
+  // Its intensity pulses in the animation loop to sell the levitation effect.
+  const magLight = new THREE.PointLight(0xff9922, 4.5, 4.0);
+  magLight.position.set(0, 0.5, 0);
+  scene.add(magLight);
+
+
+  /* ──────────────────────────────────────────────────────────────── §4
+     Texture factory — canvas-generated brushed-metal
+     ─────────────────────────────────────────────────────────────── */
+
+  /**
+   * Returns a Three.js CanvasTexture that looks like brushed metal.
+   *
+   * @param {string} baseColor  — CSS colour string for the base fill
+   * @param {number} streaks    — number of horizontal grain lines
+   * @param {number} size       — canvas resolution (px, power of two)
+   */
+  function makeBrushedMetal(baseColor = '#1a1c22', streaks = 90, size = 512) {
+    const canvas  = document.createElement('canvas');
+    canvas.width  = size;
+    canvas.height = size;
+    const ctx     = canvas.getContext('2d');
+
+    // Solid base
+    ctx.fillStyle = baseColor;
+    ctx.fillRect(0, 0, size, size);
+
+    // Horizontal grain lines — random lightness and opacity simulate brushing
+    for (let i = 0; i < streaks; i++) {
+      const y   = Math.random() * size;
+      const lum = 180 + Math.floor(Math.random() * 60);
+      ctx.strokeStyle = `rgba(${lum},${lum},${lum+10},${0.03 + Math.random() * 0.07})`;
+      ctx.lineWidth   = 0.4 + Math.random() * 1.2;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(size, y + (Math.random() - 0.5) * 3);
+      ctx.stroke();
+    }
+
+    return new THREE.CanvasTexture(canvas);
+  }
+
+
+  /* ──────────────────────────────────────────────────────────────── §5
+     Base assembly
+     ─────────────────────────────────────────────────────────────── */
+
+  // — Main cylindrical body ————————————————————————————————
+  const baseMaterial = new THREE.MeshStandardMaterial({
+    map:             makeBrushedMetal('#14161b', 100),  // near-black metal
+    roughness:       0.30,
+    metalness:       0.90,
+    envMapIntensity: 0.8,
+  });
+  const baseBody = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.5, 1.5, 0.24, 80),
+    baseMaterial
+  );
+  baseBody.castShadow    = true;
+  baseBody.receiveShadow = true;
+  scene.add(baseBody);
+
+  // — Top face — slightly lighter brushed disc ——————————————
+  const topFaceMaterial = new THREE.MeshStandardMaterial({
+    map:       makeBrushedMetal('#1e2128', 70),
+    roughness: 0.22,
+    metalness: 0.92,
+  });
+  const topFace = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.48, 1.48, 0.012, 80),
+    topFaceMaterial
+  );
+  topFace.position.y    = 0.126;
+  topFace.receiveShadow = true;
+  scene.add(topFace);
+
+  // — Chamfered top edge bevel ——————————————————————————————
+  // A thin torus at the base top perimeter gives a machined-part look
+  const bevelMaterial = new THREE.MeshStandardMaterial({
+    color:     0x3a3f4a,
+    roughness: 0.15,
+    metalness: 1.0,
+  });
+  const topBevel = new THREE.Mesh(
+    new THREE.TorusGeometry(1.49, 0.018, 8, 80),
+    bevelMaterial
+  );
+  topBevel.rotation.x = Math.PI / 2;
+  topBevel.position.y = 0.12;
+  scene.add(topBevel);
+
+  // — LED accent ring — blue-white emissive strip at base perimeter
+  const ledRingMaterial = new THREE.MeshBasicMaterial({
+    color:       0x55aaff,
+    transparent: true,
+    opacity:     0.6,
+    blending:    THREE.AdditiveBlending,
+    depthWrite:  false,
+  });
+  const ledRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1.5, 0.010, 8, 80),
+    ledRingMaterial
+  );
+  ledRing.rotation.x = Math.PI / 2;
+  ledRing.position.y = 0.0;
+  scene.add(ledRing);
+
+  // — Shadow receiver — invisible plane so the platform casts a shadow
+  // onto the base top even though the base mesh is opaque
+  const shadowPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(6, 6),
+    new THREE.ShadowMaterial({ opacity: 0.35, transparent: true })
+  );
+  shadowPlane.rotation.x   = -Math.PI / 2;
+  shadowPlane.position.y   = -0.12;
+  shadowPlane.receiveShadow = true;
+  scene.add(shadowPlane);
+
+
+  /* ──────────────────────────────────────────────────────────────── §6
+     Floating platform
+     ─────────────────────────────────────────────────────────────── */
+
+  // Platform group — we animate this group so children move together
+  const platformGroup = new THREE.Group();
+  scene.add(platformGroup);
+
+  // — Main disc ————————————————————————————————————————————
+  const platformMaterial = new THREE.MeshStandardMaterial({
+    map:             makeBrushedMetal('#272b34', 60),
+    roughness:       0.18,
+    metalness:       0.95,
+    envMapIntensity: 1.6,
+  });
+  const platformDisc = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.82, 0.78, 0.10, 72),
+    platformMaterial
+  );
+  platformDisc.castShadow = true;
+  platformGroup.add(platformDisc);
+
+  // — Top edge trim ————————————————————————————————————————
+  const trimMaterial = new THREE.MeshStandardMaterial({
+    color:     0x4a5060,
+    roughness: 0.12,
+    metalness: 1.0,
+  });
+  const platformTrim = new THREE.Mesh(
+    new THREE.TorusGeometry(0.80, 0.015, 8, 72),
+    trimMaterial
+  );
+  platformTrim.rotation.x = Math.PI / 2;
+  platformTrim.position.y = 0.05;
+  platformGroup.add(platformTrim);
+
+  // — Underglow ring — emissive blue circle on the disc's bottom face
+  //   This is the key visual that sells the "magnetically charged" look.
+  const underglowMaterial = new THREE.MeshBasicMaterial({
+    color:       0x0088ff,
+    transparent: true,
+    opacity:     0.75,
+    blending:    THREE.AdditiveBlending,
+    depthWrite:  false,
+    side:        THREE.DoubleSide,
+  });
+  const underglow = new THREE.Mesh(
+    new THREE.RingGeometry(0.15, 0.78, 72),
+    underglowMaterial
+  );
+  underglow.rotation.x = Math.PI / 2;
+  underglow.position.y = -0.052;   // just beneath the disc bottom face
+  platformGroup.add(underglow);
+
+
+  /* ──────────────────────────────────────────────────────────────── §7
+     Magnetic atmosphere — halo, field beam, rising particles
+     ─────────────────────────────────────────────────────────────── */
+
+  // — Ground halo — soft glowing circle on the base top face.
+  //   Gives the impression of a magnetic field footprint.
+  const groundHaloMaterial = new THREE.MeshBasicMaterial({
+    color:       0x2255cc,
+    transparent: true,
+    opacity:     0.14,
+    blending:    THREE.AdditiveBlending,
+    depthWrite:  false,
+    side:        THREE.DoubleSide,
+  });
+  const groundHalo = new THREE.Mesh(
+    new THREE.RingGeometry(0.05, 0.92, 72),
+    groundHaloMaterial
+  );
+  groundHalo.rotation.x = -Math.PI / 2;
+  groundHalo.position.y  = 0.133;  // just above base top face
+  scene.add(groundHalo);
+
+  // — Field beam — translucent truncated cone between base and platform.
+  //   Rendered with additive blending so it glows without hiding geometry.
+  const beamMaterial = new THREE.MeshBasicMaterial({
+    color:       0x1155aa,
+    transparent: true,
+    opacity:     0.055,
+    blending:    THREE.AdditiveBlending,
+    depthWrite:  false,
+    side:        THREE.DoubleSide,
+  });
+  const fieldBeam = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.10, 0.40, 0.85, 36, 1, true),
+    beamMaterial
+  );
+  fieldBeam.position.y = 0.56;   // centred between base surface and disc bottom
+  scene.add(fieldBeam);
+
+  // — Rising particles — sparse gold dots that travel upward.
+  //   Reset to a random point on the base plane when they exceed MAX_Y.
+  const PARTICLE_COUNT = 320;
+  const pPositions     = new Float32Array(PARTICLE_COUNT * 3);
+  const pSpeeds        = new Float32Array(PARTICLE_COUNT);
+
+  function resetParticle(i) {
+    const angle      = Math.random() * Math.PI * 2;
+    const radius     = Math.random() * 0.85;
+    pPositions[i*3]   = Math.cos(angle) * radius;
+    pPositions[i*3+1] = Math.random() * 1.4 + 0.13;  // start within the beam
+    pPositions[i*3+2] = Math.sin(angle) * radius;
+    pSpeeds[i] = 0.003 + Math.random() * 0.007;
+  }
+  for (let i = 0; i < PARTICLE_COUNT; i++) resetParticle(i);
+
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+
+  const particleMat = new THREE.PointsMaterial({
+    color:           0xffbb33,
+    size:            0.018,
+    transparent:     true,
+    opacity:         0.70,
+    blending:        THREE.AdditiveBlending,
+    depthWrite:      false,
+    sizeAttenuation: true,
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+
+  /* ──────────────────────────────────────────────────────────────── §8
+     Post-processing — Unreal Bloom
+     Adds a soft luminous glow around bright areas (LED ring, underglow)
+     without blowing out the whole scene.
+     ─────────────────────────────────────────────────────────────── */
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(container.clientWidth, container.clientHeight),
+    0.75,   // strength  — higher = more glow
+    0.55,   // radius    — spread of the bloom
+    0.80    // threshold — luminance above which bloom kicks in
+  );
+  composer.addPass(bloomPass);
+
+
+  /* ──────────────────────────────────────────────────────────────── §9
+     OrbitControls
+     ─────────────────────────────────────────────────────────────── */
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 0.85, 0);     // orbit around the stand's midpoint
+  controls.enableDamping  = true;
+  controls.dampingFactor  = 0.06;
+  controls.minDistance    = 3.0;       // don't zoom inside the model
+  controls.maxDistance    = 14.0;
+  // Polar angle limits keep the camera above the base; 0 = top, π = bottom
+  controls.minPolarAngle  = Math.PI * 0.10;   // ≈18°  — prevents top-down clip
+  controls.maxPolarAngle  = Math.PI * 0.48;   // ≈86°  — stops just above desk level
+  controls.update();
+
+
+  /* ──────────────────────────────────────────────────────────────── §10
+     Responsive resize — ResizeObserver reacts to any container resize,
+     including CSS-driven changes, not just window resize events.
+     ─────────────────────────────────────────────────────────────── */
+  const resizeObserver = new ResizeObserver(() => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    if (!w || !h) return;
+
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    composer.setSize(w, h);
+    bloomPass.resolution.set(w, h);
+  });
+  resizeObserver.observe(container);
+
+
+  /* ──────────────────────────────────────────────────────────────── §11
+     Animation loop
+     ─────────────────────────────────────────────────────────────── */
+
+  // ── Levitation parameters (adjust to taste) ──────────────────
+  const FLOAT_AMPLITUDE = 0.10;    // half the total vertical travel (world units)
+  const FLOAT_FREQUENCY = 0.55;    // Hz — full bobs per second (lower = lazier)
+  const SPIN_SPEED      = 0.38;    // radians per second
+
+  const PLATFORM_BASE_Y = 0.95;    // resting centre height above scene origin
+
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // getDelta gives frame delta (seconds); clock.elapsedTime reflects total time
+    const dt = clock.getDelta();
+    const t  = clock.elapsedTime;
+
+    // ── Floating disc movement ─────────────────────────────────
+    // Smooth sinusoidal bob on the Y axis
+    platformGroup.position.y = PLATFORM_BASE_Y
+      + Math.sin(t * FLOAT_FREQUENCY * Math.PI * 2) * FLOAT_AMPLITUDE;
+
+    // Continuous Y-axis rotation (frame-rate independent via dt)
+    platformGroup.rotation.y += SPIN_SPEED * dt;
+
+    // ── Underglow & beam brightness track the levitation phase ──
+    // phase: 0 when disc is at lowest, 1 when at highest
+    const phase = (Math.sin(t * FLOAT_FREQUENCY * Math.PI * 2) + 1) * 0.5;
+
+    // Magnetic glow light pulses — brighter when disc is near the base
+    magLight.intensity = 3.5 + (1 - phase) * 2.5;
+
+    // Ground halo breathes inversely to disc height
+    groundHaloMaterial.opacity = 0.08 + (1 - phase) * 0.12;
+
+    // Underglow on disc dims slightly at the top of the bob
+    underglowMaterial.opacity = 0.5 + phase * 0.25;
+
+    // LED accent ring on base has a slow independent flicker
+    ledRingMaterial.opacity = 0.50 + Math.sin(t * 1.8) * 0.12;
+
+    // ── Rising particles ───────────────────────────────────────
+    const pos = particles.geometry.attributes.position.array;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      pos[i*3+1] += pSpeeds[i];
+      // When a particle exceeds the platform height it wraps back to the base
+      if (pos[i*3+1] > platformGroup.position.y + 0.05) resetParticle(i);
+    }
+    particles.geometry.attributes.position.needsUpdate = true;
+
+    // ── Controls + final render ────────────────────────────────
+    controls.update();          // required when enableDamping is true
+    composer.render();          // renders scene + bloom pass
+  }
+
+  animate();
+
+  </script>
+</body>
+</html>
