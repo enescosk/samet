@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "icon": "🎯",
+      "title": "Markaya Özel Tasarım",
+      "description": "Stantlar markanızın renkleri, vitrin yapısı ve ürün formuna göre kadife, ahşap, pleksi veya ışıklı kaplamalarla özelleştirilir."
+    },
+    {
+      "icon": "🛒",
+      "title": "Satış ve Kiralama",
+      "description": "Cihazları satın alabilir ya da fuar, lansman ve kısa süreli kampanyalar için kiralayabilirsiniz."
+    },
+    {
+      "icon": "🇹🇷",
+      "title": "Türkiye'de Öncü",
+      "description": "PCD, Türkiye'de manyetik levitasyon stantları alanında öncü bir markadır. Yerel destek, hızlı teslim, profesyonel kurulum."
+    },
+    {
+      "icon": "🔋",
+      "title": "Güçlü Kaldırma Kapasitesi",
+      "description": "PCD200'den PCD2000'e kadar geniş ürün yelpazesi. 2 cm'den 8 cm'ye kadar farklı yükseklik seçenekleri."
+    },
+    {
+      "icon": "🛠️",
+      "title": "Anahtar Teslim Çözüm",
+      "description": "Konsept, tasarım, üretim, kurulum ve teslim — tüm süreci tek elden yönetiyoruz. Siz sadece ürününüzü yerleştirin."
+    },
+    {
+      "icon": "🏆",
+      "title": "Premium Vitrin Deneyimi",
+      "description": "Kuyumcudan kozmetiğe, fuardan kafeye — lüks markaların tercih ettiği yenilikçi sunum çözümleri."
+    }
+  ]
+}

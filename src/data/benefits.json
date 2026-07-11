@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "icon": "✨",
+      "title": "Anında Dikkat Çeker",
+      "description": "Havada dönen ürün, klasik bir stanta göre vitrininize bakan müşterinin dikkatini ilk saniyede yakalar."
+    },
+    {
+      "icon": "🌀",
+      "title": "360° Sergileme",
+      "description": "Ürün yavaşça döner, her açıdan görünür. Müşteri ürünü kavramak için elini uzatmadan tüm detayları görür."
+    },
+    {
+      "icon": "💎",
+      "title": "Premium Algı",
+      "description": "Havada asılı ürün, markanıza lüks ve yenilikçi bir algı katar. Vitriniz prestijli bir sahneye dönüşür."
+    },
+    {
+      "icon": "🧲",
+      "title": "Temassız Sunum",
+      "description": "Ürün hiçbir yüzeye temas etmez. Hassas ve değerli ürünler için temiz, izsiz bir sergileme alanı sağlar."
+    }
+  ]
+}

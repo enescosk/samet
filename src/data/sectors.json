@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "icon": "💍", "name": "Kuyumcular", "detail": "Yüzük, kolye, pırlanta sergileme" },
+    { "icon": "🌸", "name": "Parfüm & Kozmetik", "detail": "Lüks vitrin ve lansman" },
+    { "icon": "🏛️", "name": "Fuar Stantları", "detail": "Tanıtım ve etkinlikler" },
+    { "icon": "🦷", "name": "Diş Klinikleri", "detail": "Uçan diş maketi sunumu" },
+    { "icon": "👓", "name": "Optik Mağazaları", "detail": "Gözlük çerçeve teşhiri" },
+    { "icon": "☕", "name": "Kafe & Tatlı", "detail": "Yenilikçi ürün sunumu" },
+    { "icon": "🛍️", "name": "AVM Mağazaları", "detail": "Dikkat çekici vitrinler" },
+    { "icon": "🏢", "name": "Kurumsal Promosyon", "detail": "Logolu özel maketler" },
+    { "icon": "🎨", "name": "Reklam & Mimarlık", "detail": "Konsept tasarım iş birlikleri" }
+  ]
+}

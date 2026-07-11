@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "number": "01",
+      "title": "Elektromanyetik Modül",
+      "description": "Standın içinde özel bir elektromanyetik levitasyon modülü bulunur. Cihaz prize takıldığında manyetik alan oluşur."
+    },
+    {
+      "number": "02",
+      "title": "Manyetik Denge",
+      "description": "Ürünün altına veya içine yerleştirilen özel mıknatıs, standın manyetik alanı sayesinde havada dengede kalır."
+    },
+    {
+      "number": "03",
+      "title": "Hava ve Hareket",
+      "description": "Ürün 2–8 cm yükseklikte havada asılı durur. Her açıdan görünür, vitrine hareket katar."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "items": [
+    {
+      "name": "PCD200",
+      "height": "2 cm",
+      "capacity": "Hafif",
+      "description": "Küçük ve hafif ürünler için giriş seviyesi model.",
+      "uses": ["Yüzük", "Küçük takı", "Mini obje", "Hafif promosyon ürünü"],
+      "image": "/products/PCD200/PCD200_1.png",
+      "highlighted": false
+    },
+    {
+      "name": "PCD350-L",
+      "height": "2 cm",
+      "capacity": "Orta-Hafif",
+      "description": "Orta seviye küçük ürünler için ekonomik çözüm.",
+      "uses": ["Takı", "Küçük kutular", "Hafif kozmetik", "Küçük ambalajlar"],
+      "image": "/products/PCD350L/PCD350L_1.png",
+      "highlighted": false
+    },
+    {
+      "name": "PCD350-H",
+      "height": "4 cm",
+      "capacity": "Orta-Hafif",
+      "description": "Daha yüksek uçuş mesafesiyle dikkat çeken bir sunum.",
+      "uses": ["Takı", "Gözlük", "Küçük kutular", "Hafif kozmetik"],
+      "image": "/products/PCD350H/PCD350H_1.png",
+      "highlighted": false
+    },
+    {
+      "name": "PCD500",
+      "height": "4 cm",
+      "capacity": "Orta",
+      "description": "Daha güçlü ve geniş kullanım alanına sahip popüler model.",
+      "uses": ["Parfüm", "Küçük maketler", "Kuyumcu ürünleri", "Ayakkabı"],
+      "image": "/products/PCD500/PCD500_1.png",
+      "highlighted": true
+    },
+    {
+      "name": "PCD1000",
+      "height": "4 cm",
+      "capacity": "Orta-Ağır",
+      "description": "Ağır ürünler ve geniş vitrin uygulamaları için.",
+      "uses": ["Çanta", "Ürün maketi", "Orta boy tanıtım objesi", "Özel fuar uygulamaları"],
+      "image": "/products/PCD1000/PCD1000_1.png",
+      "highlighted": false
+    },
+    {
+      "name": "PCD2000",
+      "height": "5 cm",
+      "capacity": "Ağır",
+      "description": "Yüksek taşıma kapasitesine sahip büyük model.",
+      "uses": ["Büyük maketler", "Fuar stantları", "Özel marka projeleri", "Dikkat çekici kurulumlar"],
+      "image": "/products/PCD2000/PCD2000_1.png",
+      "highlighted": false
+    },
+    {
+      "name": "PCD500-H",
+      "height": "8 cm",
+      "capacity": "500g – Premium",
+      "description": "En güçlü ve en yüksek uçuşlu model. Fark yaratan sunumlar için.",
+      "uses": ["Fuar stantları", "Pahalı çanta", "Özel marka projeleri", "Dikkat çekici vitrinler"],
+      "image": "/products/PCD2000/PCD2000_2.png",
+      "highlighted": false
+    }
+  ]
+}

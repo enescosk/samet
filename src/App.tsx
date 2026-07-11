@@ -7,6 +7,7 @@ import HowItWorks from './components/sections/HowItWorks'
 import Features from './components/sections/Features'
 import Models from './components/sections/Models'
 import Showcase from './components/sections/Showcase'
+import References from './components/sections/References'
 import Sectors from './components/sections/Sectors'
 import FAQ from './components/sections/FAQ'
 import CTA from './components/sections/CTA'
@@ -32,6 +33,7 @@ export default function App() {
         <Features />
         <Models />
         <Showcase />
+        <References />
         <Sectors />
         <FAQ />
         <CTA />

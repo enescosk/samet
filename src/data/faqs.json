@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "question": "Ürünüm havada gerçekten asılı duruyor mu?",
+      "answer": "Evet. PCD stantları, elektromanyetik levitasyon teknolojisiyle ürününüzü hiçbir yüzeye temas etmeden 2 cm ile 8 cm arasında havada asılı tutar."
+    },
+    {
+      "question": "Hangi modeli seçmeliyim?",
+      "answer": "Seçim, ürününüzün ağırlığına ve sergilemek istediğiniz yüksekliğe bağlıdır. Yüzük gibi hafif ürünler için PCD200 veya PCD350 yeterlidir. Parfüm, çanta veya maket gibi ürünler için PCD500, PCD1000 veya PCD500-H önerilir. Size en uygun modeli birlikte belirleyebiliriz."
+    },
+    {
+      "question": "Markama özel tasarım yapıyor musunuz?",
+      "answer": "Evet. Yalnızca cihaz satmıyoruz. Kadife, ahşap, pleksi, ışıklı veya logolu kaplamalarla markanızın renklerine ve vitrin yapısına özel stantlar tasarlıyoruz."
+    },
+    {
+      "question": "Kiralık olarak da alabilir miyim?",
+      "answer": "Evet. Fuar, lansman, mağaza açılışı, AVM etkinliği ve vitrin kampanyaları için kiralama hizmetimiz mevcuttur. Kurulum ve teslim dahildir."
+    },
+    {
+      "question": "Kurulum ve teslim hizmeti veriyor musunuz?",
+      "answer": "Veriyoruz. Anahtar teslim çözüm sunuyoruz: konsept, üretim, kurulum, denge ayarı ve teslim — tüm süreci tek elden yönetiyoruz."
+    },
+    {
+      "question": "Sipariş süreci nasıl ilerliyor?",
+      "answer": "Aşağıdaki formu doldurmanız yeterli. Ürün ağırlığınıza ve sergileme amacınıza göre en uygun modeli ve tasarımı öneriyor, fiyat ve teslim süresini paylaşıyoruz."
+    }
+  ]
+}

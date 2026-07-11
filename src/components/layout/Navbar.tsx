@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Button from '../ui/Button'
 import { brand } from '../../data/content'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 
 const navLinks = [
   { label: 'Nasıl Çalışır', href: '#how-it-works' },
   { label: 'Modeller', href: '#models' },
   { label: 'Özel Projeler', href: '#projects' },
+  { label: 'Referanslar', href: '#references' },
   { label: 'Sektörler', href: '#sectors' },
   { label: 'SSS', href: '#faq' },
 ]
@@ -41,7 +42,7 @@ export default function Navbar() {
             <img
               src={logo}
               alt={brand.fullName}
-              className="h-10 md:h-12 w-auto mix-blend-screen opacity-90 group-hover:opacity-100 transition-opacity"
+              className="h-10 md:h-12 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
             />
           </a>
 

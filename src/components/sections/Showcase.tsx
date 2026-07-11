@@ -56,15 +56,21 @@ export default function Showcase() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.35 }}
-                className="relative aspect-[16/9] bg-ink-800"
+                className="relative aspect-[4/3] md:aspect-[16/9] bg-ink-900 flex items-center justify-center overflow-hidden"
               >
                 <img
                   src={current.src}
-                  alt={current.alt}
-                  className="w-full h-full object-cover"
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-30"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                <img
+                  src={current.src}
+                  alt={current.alt}
+                  className="relative z-[1] max-h-full w-auto max-w-full object-contain"
+                />
+                <div className="absolute inset-0 z-[2] bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent" />
+                <div className="absolute z-[3] bottom-0 left-0 right-0 p-8 lg:p-12">
                   <p className="text-brand-300 text-xs uppercase tracking-[0.3em] mb-2">Proje</p>
                   <h3 className="font-display text-3xl lg:text-4xl font-bold text-white mb-2">
                     {current.label}

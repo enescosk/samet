@@ -51,7 +51,7 @@ export default function Models() {
 
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-white font-bold text-2xl tracking-tight">{p.name}</h3>
+                    <h3 className="text-white font-bold text-2xl tracking-tight tabular-nums">{p.name}</h3>
                     <div className="flex items-center gap-1 text-brand-300 text-xs font-medium">
                       <Move3d size={14} aria-hidden="true" />
                       <span>{p.height}</span>

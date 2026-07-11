@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "label": "Kuyumcu Vitrinleri",
+      "description": "Kadife kaplı lüks stantlar üzerinde havada dönen yüzük, kolye ve pırlantalar.",
+      "src": "/showcase/kuyumcu.png",
+      "alt": "Kuyumcu için manyetik levitasyon vitrini — havada dönen yüzük standı"
+    },
+    {
+      "label": "Parfüm & Kozmetik",
+      "description": "Parfüm şişeleri ve kozmetik ürünleri havada dönerek müşterinin dikkatini çeker.",
+      "src": "/showcase/parfum.png",
+      "alt": "Parfüm için manyetik levitasyon standı — PCD500"
+    },
+    {
+      "label": "Fuar Stantları",
+      "description": "Markaya özel konsept tasarımlarla fuar alanında öne çıkan sergileme çözümleri.",
+      "src": "/showcase/fuar.png",
+      "alt": "Fuar standı için manyetik levitasyon kurulumu — PCD2000"
+    },
+    {
+      "label": "Diş Klinikleri",
+      "description": "Uçan diş maketleri ile fark yaratan ve eğitici klinik sunumları.",
+      "src": "/showcase/dis.png",
+      "alt": "Diş kliniği için uçan diş maketi"
+    },
+    {
+      "label": "Kurumsal & Promosyon",
+      "description": "Logolu özel maketler ve kurumsal tanıtım objeleri ile markanızı sahneye taşıyın.",
+      "src": "/showcase/kafe.png",
+      "alt": "Kurumsal promosyon için manyetik levitasyon standı — PCD1000"
+    },
+    {
+      "label": "Optik & Gözlük",
+      "description": "Yüksek uçuş mesafesi ile gözlük çerçevelerini her açıdan sergileyin.",
+      "src": "/showcase/optik.png",
+      "alt": "Optik mağaza için manyetik levitasyon standı — PCD350H"
+    }
+  ]
+}

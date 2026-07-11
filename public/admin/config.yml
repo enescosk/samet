@@ -1,0 +1,176 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: 'İçerik: {{collection}} "{{slug}}" eklendi'
+    update: 'İçerik: {{collection}} "{{slug}}" güncellendi'
+    delete: 'İçerik: {{collection}} "{{slug}}" silindi'
+    uploadMedia: 'Görsel yüklendi: {{path}}'
+    deleteMedia: 'Görsel silindi: {{path}}'
+
+# Yerel test için: terminalde `npx decap-server` çalıştırın, panel
+# http://localhost:5173/admin adresinden git olmadan çalışır.
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: "tr"
+
+collections:
+  - name: "genel"
+    label: "Genel Bilgiler"
+    editor:
+      preview: false
+    files:
+      - name: "brand"
+        label: "Marka & İletişim"
+        file: "src/data/brand.json"
+        fields:
+          - { name: "name", label: "Kısa Ad", widget: "string" }
+          - { name: "fullName", label: "Tam Ad", widget: "string" }
+          - { name: "tagline", label: "Slogan", widget: "string" }
+          - { name: "headline", label: "Ana Başlık (Hero)", widget: "string" }
+          - { name: "description", label: "Açıklama (Hero)", widget: "text" }
+          - { name: "short", label: "Kısa Açıklama (Footer)", widget: "text" }
+          - { name: "ctaPrimary", label: "Birincil Buton Metni", widget: "string" }
+          - { name: "ctaSecondary", label: "İkincil Buton Metni", widget: "string" }
+          - { name: "instagram", label: "Instagram Kullanıcı Adı", widget: "string" }
+          - { name: "instagramUrl", label: "Instagram Linki", widget: "string" }
+          - { name: "email", label: "E-posta", widget: "string" }
+          - { name: "formEndpoint", label: "Form Endpoint (opsiyonel)", widget: "string", required: false }
+
+  - name: "referanslar"
+    label: "Referanslar / Markalar"
+    editor:
+      preview: false
+    files:
+      - name: "references"
+        label: "Çalışılan Markalar"
+        file: "src/data/references.json"
+        fields:
+          - name: "items"
+            label: "Markalar"
+            label_singular: "Marka"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Marka Adı", widget: "string" }
+              - { name: "logo", label: "Marka Logosu (opsiyonel)", widget: "image", required: false }
+              - { name: "image", label: "Proje Görseli (opsiyonel)", widget: "image", required: false }
+              - { name: "description", label: "Açıklama", widget: "text", required: false }
+              - { name: "url", label: "Web Sitesi (opsiyonel)", widget: "string", required: false }
+
+  - name: "urunler"
+    label: "Ürün Modelleri"
+    editor:
+      preview: false
+    files:
+      - name: "products"
+        label: "Ürün Modelleri Listesi"
+        file: "src/data/products.json"
+        fields:
+          - name: "items"
+            label: "Modeller"
+            label_singular: "Model"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Model Adı / Kodu", widget: "string" }
+              - { name: "height", label: "Uçuş Yüksekliği", widget: "string" }
+              - { name: "capacity", label: "Kapasite", widget: "string" }
+              - { name: "description", label: "Açıklama", widget: "text" }
+              - name: "uses"
+                label: "Kullanım Alanları"
+                widget: "list"
+                field: { name: "use", label: "Alan", widget: "string" }
+              - { name: "image", label: "Görsel", widget: "image" }
+              - { name: "highlighted", label: "Öne Çıkan (Popüler rozet)", widget: "boolean", default: false }
+
+  - name: "projeler"
+    label: "Özel Projeler"
+    editor:
+      preview: false
+    files:
+      - name: "projects"
+        label: "Özel Projeler Galerisi"
+        file: "src/data/projects.json"
+        fields:
+          - name: "items"
+            label: "Projeler"
+            label_singular: "Proje"
+            widget: "list"
+            fields:
+              - { name: "label", label: "Başlık", widget: "string" }
+              - { name: "description", label: "Açıklama", widget: "text" }
+              - { name: "src", label: "Görsel", widget: "image" }
+              - { name: "alt", label: "Görsel Alt Metni (SEO)", widget: "string" }
+
+  - name: "sss"
+    label: "Sıkça Sorulan Sorular"
+    editor:
+      preview: false
+    files:
+      - name: "faqs"
+        label: "SSS Listesi"
+        file: "src/data/faqs.json"
+        fields:
+          - name: "items"
+            label: "Sorular"
+            label_singular: "Soru"
+            widget: "list"
+            fields:
+              - { name: "question", label: "Soru", widget: "string" }
+              - { name: "answer", label: "Cevap", widget: "text" }
+
+  - name: "bolumler"
+    label: "Diğer Bölümler"
+    editor:
+      preview: false
+    files:
+      - name: "benefits"
+        label: "Neden Havada? (Faydalar)"
+        file: "src/data/benefits.json"
+        fields:
+          - name: "items"
+            label: "Faydalar"
+            label_singular: "Fayda"
+            widget: "list"
+            fields:
+              - { name: "icon", label: "İkon (emoji)", widget: "string" }
+              - { name: "title", label: "Başlık", widget: "string" }
+              - { name: "description", label: "Açıklama", widget: "text" }
+      - name: "features"
+        label: "Neden PCD? (Avantajlar)"
+        file: "src/data/features.json"
+        fields:
+          - name: "items"
+            label: "Avantajlar"
+            label_singular: "Avantaj"
+            widget: "list"
+            fields:
+              - { name: "icon", label: "İkon (emoji)", widget: "string" }
+              - { name: "title", label: "Başlık", widget: "string" }
+              - { name: "description", label: "Açıklama", widget: "text" }
+      - name: "steps"
+        label: "Nasıl Çalışır? (Adımlar)"
+        file: "src/data/steps.json"
+        fields:
+          - name: "items"
+            label: "Adımlar"
+            label_singular: "Adım"
+            widget: "list"
+            fields:
+              - { name: "number", label: "Adım No", widget: "string" }
+              - { name: "title", label: "Başlık", widget: "string" }
+              - { name: "description", label: "Açıklama", widget: "text" }
+      - name: "sectors"
+        label: "Hedef Sektörler"
+        file: "src/data/sectors.json"
+        fields:
+          - name: "items"
+            label: "Sektörler"
+            label_singular: "Sektör"
+            widget: "list"
+            fields:
+              - { name: "icon", label: "İkon (emoji)", widget: "string" }
+              - { name: "name", label: "Sektör Adı", widget: "string" }
+              - { name: "detail", label: "Detay", widget: "string" }

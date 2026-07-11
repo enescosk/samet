@@ -1,6 +1,6 @@
 import { Mail } from 'lucide-react'
 import { brand } from '../../data/content'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 
 function Instagram({ size = 16 }: { size?: number }) {
   return (
@@ -32,7 +32,7 @@ export default function Footer() {
               <img
                 src={logo}
                 alt={brand.fullName}
-                className="h-12 w-auto mix-blend-screen opacity-80"
+                className="h-12 w-auto opacity-80"
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
