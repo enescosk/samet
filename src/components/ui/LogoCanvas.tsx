@@ -78,7 +78,7 @@ function BottomFrame() {
 function PCDText() {
   return (
     <Suspense fallback={null}>
-      <Center position={[0, 0, BD / 2 + 0.04]}>
+      <Center position={[0, 0, 0.06]}>
         <Text3D
           font="/helvetiker_bold.typeface.json"
           size={0.36}

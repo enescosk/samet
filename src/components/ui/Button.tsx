@@ -39,7 +39,7 @@ export default function Button({ variant = 'primary', size = 'md', children, cla
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
         className={cls}
-        {...(props as any)}
+        {...(props as unknown as React.ComponentProps<typeof motion.a>)}
       >
         {children}
       </motion.a>
@@ -51,7 +51,7 @@ export default function Button({ variant = 'primary', size = 'md', children, cla
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       className={cls}
-      {...(props as any)}
+      {...(props as unknown as React.ComponentProps<typeof motion.button>)}
     >
       {children}
     </motion.button>
