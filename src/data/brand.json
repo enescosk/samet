@@ -1,14 +1,14 @@
 {
-  "name": "PCD",
-  "fullName": "Prestige Creative Displays",
-  "tagline": "Uçuruyoruz",
-  "headline": "Ürünlerinizi Havada Sergileyin",
-  "description": "PCD manyetik levitasyon stantları ile vitrinlerinizi, fuar alanlarınızı ve ürün lansmanlarınızı daha dikkat çekici hale getirin.",
-  "short": "PCD, ürünlerinizi manyetik levitasyon teknolojisiyle havada sergileyen premium vitrin ve stant sistemleri geliştirir.",
-  "ctaPrimary": "Teklif Al",
   "ctaSecondary": "Modelleri Keşfet",
+  "name": "PCD",
+  "tagline": "Uçuruyoruz",
+  "ctaPrimary": "Teklif Al",
   "instagram": "@pcd.lab",
-  "instagramUrl": "https://instagram.com/pcd.lab",
-  "email": "info@pcd.lab",
-  "formEndpoint": ""
+  "headline": "Ürünlerinizi Havada Sergileyin",
+  "formEndpoint": "",
+  "fullName": "Prestige Creative Displays",
+  "short": "PCD, ürünlerinizi manyetik levitasyon teknolojisiyle havada sergileyen premium vitrin ve stant sistemleri geliştirir.",
+  "email": "prestige.pcd@gmail.com",
+  "description": "PCD manyetik levitasyon stantları ile vitrinlerinizi, fuar alanlarınızı ve ürün lansmanlarınızı daha dikkat çekici hale getirin.",
+  "instagramUrl": "https://instagram.com/pcd.lab"
 }
