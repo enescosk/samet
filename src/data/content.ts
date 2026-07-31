@@ -31,9 +31,9 @@ export type Faq = { question: string; answer: string }
 export type Reference = {
   name: string
   logo: string
-  image: string
-  description: string
-  url: string
+  image?: string
+  description?: string
+  url?: string
 }
 
 export const brand = brandData
