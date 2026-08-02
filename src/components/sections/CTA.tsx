@@ -28,7 +28,7 @@ export default function CTA() {
     setSubmitting(true)
     setError(false)
 
-    if (brand.formEndpoint) {
+    if (brand.formEndpoint && brand.formAccessKey) {
       try {
         const res = await fetch(brand.formEndpoint, {
           method: 'POST',
@@ -128,6 +128,14 @@ export default function CTA() {
                   </div>
                 ) : (
                   <form onSubmit={onSubmit} className="space-y-4" noValidate>
+                    {/* Web3Forms gizli alanları */}
+                    <input type="hidden" name="access_key" value={brand.formAccessKey} />
+                    <input type="hidden" name="subject" value="PCD — Yeni Teklif Talebi" />
+                    <input type="hidden" name="from_name" value={brand.name} />
+                    <input type="hidden" name="purpose" value={purpose} />
+                    {/* Spam koruması (honeypot) — kullanıcı görmez */}
+                    <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
                     <div className="grid sm:grid-cols-2 gap-3">
                       <Input label="Ad Soyad" name="name" placeholder="Adınız soyadınız" required />
                       <Input label="Firma" name="company" placeholder="Firma adı" />
