@@ -60,62 +60,73 @@
       "name": "Koç Kuyumculuk",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_30_03.png",
       "url": "https://www.instagram.com/reel/DLP6AlZN55l/",
-      "image": "/uploads/chatgpt-image-2-ağu-2026-04_12_32.png"
+      "image": "/uploads/chatgpt-image-2-ağu-2026-04_12_32.png",
+      "description": "Koç Kuyumculuk Çerkezköy için kendi verdikleri ölçüler ile özel olarak ürettiğimiz gizli kasa Uçan Takı Standı - PCD200"
     },
     {
       "name": "Hedef Diş Polikliniği",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_34_00.png",
       "url": "https://www.instagram.com/reel/DLaJ9NDtcvF/",
-      "image": "/uploads/chatgpt-image-2-ağu-2026-04_14_25.png"
+      "image": "/uploads/chatgpt-image-2-ağu-2026-04_14_25.png",
+      "description": "Hedef Diş için özel olarak ürettiğimiz Uçan Diş Standı - PCD350YB"
     },
     {
       "name": "Vize Mobilya",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_35_16.png",
       "url": "https://www.instagram.com/reel/DUVIUiHDPWl/",
-      "image": "/uploads/chatgpt-image-2-ağu-2026-04_18_26.png"
+      "image": "/uploads/chatgpt-image-2-ağu-2026-04_18_26.png",
+      "description": "Vize Mobilya için özel olarak ürettiğimiz Uçan Mobilya Fabrika Maketi Standı, Mobilya Fuarlarında sergilendi - PCD2000"
     },
     {
       "name": "Emporio Power",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_36_07.png",
       "url": "https://www.instagram.com/reel/DPdyOSxDJwF/",
-      "image": "/uploads/chatgpt-image-2-ağu-2026-04_21_43.png"
+      "image": "/uploads/chatgpt-image-2-ağu-2026-04_21_43.png",
+      "description": "Emporio Power için gizli kasa olarak ürettiğimiz Uçan İçecek Standı, Uluslararası Gıda Fuarında Sergilendi - PCD200"
     },
     {
       "name": "Akon Rulo",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_36_54.png",
       "url": "https://www.instagram.com/p/DGutaniMhSW/?img_index=1",
-      "image": "/uploads/chatgpt-image-2-ağu-2026-15_28_15.png"
+      "image": "/uploads/chatgpt-image-2-ağu-2026-15_28_15.png",
+      "description": "Akon Rulo için özel olarak ürettiğimiz Uçan Rulo Kağıt Standı - PCD1000"
     },
     {
       "name": "Wondress Baby",
       "logo": "/uploads/chatgpt-image-30-tem-2026-01_59_43.png",
       "image": "/uploads/chatgpt-image-2-ağu-2026-15_32_51.png",
-      "url": "https://www.instagram.com/p/DSSE9o8DFJe/"
+      "url": "https://www.instagram.com/p/DSSE9o8DFJe/",
+      "description": "Wondress Baby için özel olarak ürettiğimiz Uçan Bebek Elbisesi Standı - PCD2000"
     },
     {
       "name": "Oakberry",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_01_21.png",
-      "url": "https://www.instagram.com/reel/DRsglg4DM8Y/"
+      "url": "https://www.instagram.com/reel/DRsglg4DM8Y/",
+      "description": "Oak Berry Türkiye için ürettiğimiz kasa önü Uçan Bardak Standı - PCD500"
     },
     {
       "name": "Creavit",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_03_30.png",
-      "url": "https://www.instagram.com/reel/DQgs-ggDBYt/"
+      "url": "https://www.instagram.com/reel/DQgs-ggDBYt/",
+      "description": "Creavit için ürettiğimiz özel tasarım Uçan Lavabo Standı - PCD2000"
     },
     {
       "name": "Dünya Group",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_05_56.png",
-      "url": "https://www.instagram.com/reel/DXbnPDZDOKj/"
+      "url": "https://www.instagram.com/reel/DXbnPDZDOKj/",
+      "description": "Dünya Group için özel olarak ürettiğimiz Uçan Logo Standı - PCD350L"
     },
     {
       "name": "Gedikoğlu Zeytincilik",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_06_47.png",
-      "url": "https://www.instagram.com/reel/DYZGKdfsrm6/"
+      "url": "https://www.instagram.com/reel/DYZGKdfsrm6/",
+      "description": "Gedikoğlu Zeytin için ürettiğimiz Uçan Zeytin Kavanozu Standı - PCD500"
     },
     {
       "name": "Işılsan Plastik",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_08_07.png",
-      "url": "https://www.instagram.com/reel/DZc5vMGsXie/"
+      "url": "https://www.instagram.com/reel/DZc5vMGsXie/",
+      "description": "Işılsan Plastik tarafında fuarlarında kullanılan Uçan Yüzük Marlonu Standı - PCD1000"
     },
     {
       "name": "UFS",
@@ -123,15 +134,18 @@
     },
     {
       "name": "Venüs Pırlanta",
-      "logo": "/uploads/chatgpt-image-30-tem-2026-02_12_01.png"
+      "logo": "/uploads/chatgpt-image-30-tem-2026-02_12_01.png",
+      "description": "Venüs Pırlanta için vitrinlerinde kullanılmak üzere üretilen Uçan Takı Standı - PCD350L"
     },
     {
       "name": "Dekoral Boya",
-      "logo": "/uploads/chatgpt-image-30-tem-2026-02_13_20.png"
+      "logo": "/uploads/chatgpt-image-30-tem-2026-02_13_20.png",
+      "description": "Dekoral Boya'nın Coral markası için ürettiğimiz ve fuarlarında sergiledikleri gömülü sistem Uçan Boya Tenekesi Standı - PCD2000"
     },
     {
       "name": "Gözdelux Optik",
-      "logo": "/uploads/chatgpt-image-30-tem-2026-02_14_13.png"
+      "logo": "/uploads/chatgpt-image-30-tem-2026-02_14_13.png",
+      "description": "Gözdelux Optik için özel olarak hem ahşap standını hem de PCD standını ürettiğimiz özel tasarım Uçan Gözlük Standı - PCD350H"
     }
   ]
 }
