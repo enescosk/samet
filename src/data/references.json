@@ -101,30 +101,35 @@
     {
       "name": "Oakberry",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_01_21.png",
+      "image": "/uploads/oakberry.png",
       "url": "https://www.instagram.com/reel/DRsglg4DM8Y/",
       "description": "Oak Berry Türkiye için ürettiğimiz kasa önü Uçan Bardak Standı - PCD500"
     },
     {
       "name": "Creavit",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_03_30.png",
+      "image": "/uploads/creavit.png",
       "url": "https://www.instagram.com/reel/DQgs-ggDBYt/",
       "description": "Creavit için ürettiğimiz özel tasarım Uçan Lavabo Standı - PCD2000"
     },
     {
       "name": "Dünya Group",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_05_56.png",
+      "image": "/uploads/dunya-group.png",
       "url": "https://www.instagram.com/reel/DXbnPDZDOKj/",
       "description": "Dünya Group için özel olarak ürettiğimiz Uçan Logo Standı - PCD350L"
     },
     {
       "name": "Gedikoğlu Zeytincilik",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_06_47.png",
+      "image": "/uploads/gedikoglu-zeytincilik.png",
       "url": "https://www.instagram.com/reel/DYZGKdfsrm6/",
       "description": "Gedikoğlu Zeytin için ürettiğimiz Uçan Zeytin Kavanozu Standı - PCD500"
     },
     {
       "name": "Işılsan Plastik",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_08_07.png",
+      "image": "/uploads/isilsan-plastik.png",
       "url": "https://www.instagram.com/reel/DZc5vMGsXie/",
       "description": "Işılsan Plastik tarafında fuarlarında kullanılan Uçan Yüzük Marlonu Standı - PCD1000"
     },
@@ -135,17 +140,20 @@
     {
       "name": "Venüs Pırlanta",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_12_01.png",
+      "image": "/uploads/venus-pirlanta.png",
       "description": "Venüs Pırlanta için vitrinlerinde kullanılmak üzere üretilen Uçan Takı Standı - PCD350L"
     },
     {
       "name": "Dekoral Boya",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_13_20.png",
+      "image": "/uploads/dekoral-boya.png",
       "description": "Dekoral Boya'nın Coral markası için ürettiğimiz ve fuarlarında sergiledikleri gömülü sistem Uçan Boya Tenekesi Standı - PCD2000",
       "url": "https://www.instagram.com/reel/DZz3ILbsdnD/"
     },
     {
       "name": "Gözdelux Optik",
       "logo": "/uploads/chatgpt-image-30-tem-2026-02_14_13.png",
+      "image": "/uploads/gozdelux-optik.png",
       "description": "Gözdelux Optik için özel olarak hem ahşap standını hem de PCD standını ürettiğimiz özel tasarım Uçan Gözlük Standı - PCD350H"
     }
   ]
