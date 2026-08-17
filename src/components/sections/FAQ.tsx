@@ -5,6 +5,50 @@ import AnimatedSection from '../ui/AnimatedSection'
 import SectionHeader from '../ui/SectionHeader'
 import { faqs } from '../../data/content'
 
+function renderInline(text: string) {
+  const parts = text.split(/(\*\*.*?\*\*)/g)
+  return parts.map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="text-white font-medium">
+        {part.slice(2, -2).trim()}
+      </strong>
+    ) : (
+      part
+    )
+  )
+}
+
+function AnswerBody({ answer }: { answer: string }) {
+  if (!answer.includes('\n')) {
+    return <p className="px-6 pb-5 text-slate-400 leading-relaxed">{answer}</p>
+  }
+
+  const lines = answer.split('\n').filter((line) => line.trim() !== '')
+
+  return (
+    <div className="px-6 pb-5 text-slate-400 leading-relaxed space-y-3">
+      {lines.map((line, i) => {
+        const trimmed = line.trim()
+        if (trimmed.startsWith('### ')) {
+          return (
+            <p key={i} className="font-display text-white font-medium pt-1">
+              {trimmed.slice(4)}
+            </p>
+          )
+        }
+        if (trimmed.startsWith('* ')) {
+          return (
+            <p key={i} className="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-brand-400">
+              {renderInline(trimmed.slice(2))}
+            </p>
+          )
+        }
+        return <p key={i}>{renderInline(trimmed)}</p>
+      })}
+    </div>
+  )
+}
+
 function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [open, setOpen] = useState(false)
   const panelId = `faq-panel-${index}`
@@ -45,7 +89,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
               transition={{ duration: 0.25, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
-              <p className="px-6 pb-5 text-slate-400 leading-relaxed">{answer}</p>
+              <AnswerBody answer={answer} />
             </motion.div>
           )}
         </AnimatePresence>
