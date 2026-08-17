@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import Button from '../ui/Button'
+import CanvasErrorBoundary from '../ui/CanvasErrorBoundary'
 import { brand } from '../../data/content'
 
 const LogoCanvas = lazy(() => import('../ui/LogoCanvas'))
@@ -114,9 +115,11 @@ export default function Hero() {
 
               {/* 3D logo canvas — fills the square */}
               <div className="absolute inset-0">
-                <Suspense fallback={null}>
-                  <LogoCanvas />
-                </Suspense>
+                <CanvasErrorBoundary>
+                  <Suspense fallback={null}>
+                    <LogoCanvas />
+                  </Suspense>
+                </CanvasErrorBoundary>
               </div>
 
               {/* Levitation shadow synced to 4 s float cycle */}
