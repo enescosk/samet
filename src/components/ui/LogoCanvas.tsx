@@ -1,6 +1,6 @@
 import { useRef, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Text3D, Center } from '@react-three/drei'
+import { Environment, Lightformer, Text3D, Center } from '@react-three/drei'
 import * as THREE from 'three'
 
 // ─── Logo dimensions ──────────────────────────────────────────────────────────
@@ -150,7 +150,26 @@ function Scene() {
       <pointLight position={[0, BASE_Y + 0.15, 0]} intensity={0.7} color="#dcae3b" distance={2.2} decay={2} />
 
       <Suspense fallback={null}>
-        <Environment preset="city" />
+        <Environment resolution={256}>
+          <group>
+            {/* Soft ring of fill panels around the object so reflections stay even as it rotates */}
+            {Array.from({ length: 10 }).map((_, i) => {
+              const angle = (i / 10) * Math.PI * 2
+              return (
+                <Lightformer
+                  key={i}
+                  intensity={0.9}
+                  position={[Math.sin(angle) * 5, 1.5, Math.cos(angle) * 5]}
+                  rotation-y={angle + Math.PI}
+                  scale={[3, 3, 1]}
+                  color={i % 2 === 0 ? '#fff7e0' : '#dcae3b'}
+                />
+              )
+            })}
+            <Lightformer intensity={1.4} rotation-x={Math.PI / 2} position={[0, 5, 0]} scale={[4, 4, 1]} color="#fff7e0" />
+            <Lightformer intensity={0.6} rotation-x={-Math.PI / 2} position={[0, -5, 0]} scale={[4, 4, 1]} color="#3a3a4a" />
+          </group>
+        </Environment>
         <LogoMesh />
         <LevitationBase />
       </Suspense>
